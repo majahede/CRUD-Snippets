@@ -1,5 +1,16 @@
-<p>
+<h1>
   CRUD Snippets application
-</p>
+</h1>
 
-
+<table>
+  <caption>Snippets</caption>
+  <tbody>
+    {{#if viewData.snippets}}
+    {{#each viewData.snippets}}
+    <tr>
+      <td>{{this.value}}</td>
+    </tr>
+    {{/each}}
+  {{/if}}
+  </tbody>
+</table>

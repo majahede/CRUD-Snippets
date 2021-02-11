@@ -1,3 +1,5 @@
+import { Snippet } from '../models/snippet.js'
+
 /**
  * Encapsulates a controller.
  */
@@ -10,8 +12,19 @@ export class SnippetsController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  index (req, res, next) {
-    res.render('snippets/index')
+  async index (req, res, next) {
+    try {
+      const viewData = {
+        snippets: (await Snippet.find({}))
+          .map(snippet => ({ // Transform to object.
+            id: snippet._id,
+            value: snippet.value
+          }))
+      }
+      res.render('snippets/index', { viewData })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   /**
