@@ -10,3 +10,8 @@ header {
   background-color: grey;
   height: 50px;
 }
+
+#snippets-input {
+  width: 300px;
+  height: 200px;
+}

@@ -6,4 +6,5 @@ export const router = express.Router()
 const controller = new SnippetsController()
 
 router.get('/', controller.index)
-router.post('/', controller.indexPost)
+
+router.get('/new', controller.new)

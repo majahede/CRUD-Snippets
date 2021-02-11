@@ -15,17 +15,37 @@ export class SnippetsController {
   }
 
   /**
-   * Renders a view, based on posted data, and sends
-   * the rendered HTMl as an HTTP response.
+   * Returns a HTML form for creating a new snippet.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
-   * @param {Function} next - Express next middleware function.
    */
-  indexPost (req, res, next) {
-    const viewData = { // datat som ska skickas till vyn.
+  async new (req, res) {
+    const viewData = {
+      value: undefined
     }
+    res.render('snippets/new', { viewData })
+  }
 
-    res.render('snippets', { viewData })
+  /**
+   * Create new snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   *
+   */
+  async create (req, res) {
+    try {
+      const snippet = new Snippet({
+        value: req.body.value
+      })
+      // save snippet to the database.
+      await snippet.save()
+
+      // redirect to start page.
+      res.redirect('.')
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
