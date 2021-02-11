@@ -5,8 +5,7 @@ import { Snippet } from '../models/snippet.js'
  */
 export class SnippetsController {
   /**
-   * Renders a view and sends the rendered HTMl as an HTTP response.
-   * index GET.
+   * Displays snippets.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -22,6 +21,7 @@ export class SnippetsController {
           }))
       }
       res.render('snippets/index', { viewData })
+      console.log(viewData)
     } catch (error) {
       console.log(error)
     }
@@ -57,6 +57,38 @@ export class SnippetsController {
 
       // redirect to start page.
       res.redirect('.')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /**
+   * Updates a snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   *
+   */
+  async update (req, res) {
+    try {
+      await Snippet.updateOne({ _id: req.body.id }, {
+        value: req.body.value
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /**
+   * Deletes a snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   *
+   */
+  async delete (req, res) {
+    try {
+      await Snippet.deleteOne({ _id: req.body.id })
     } catch (error) {
       console.log(error)
     }
