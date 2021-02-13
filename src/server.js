@@ -49,7 +49,21 @@ const main = async () => {
       }
     }
 
+    if (app.get('env') === 'production') {
+      app.set('trust proxy', 1)
+      sessionOptions.cookie.secure = true
+    }
+
     app.use(session(sessionOptions))
+
+    app.use((req, res, next) => {
+      // Flash messages - survives only a round trip.
+      if (req.session.flash) {
+        res.locals.flash = req.session.flash
+        delete req.session.flash
+      }
+      next()
+    })
 
     // register routes
     app.use('/', router)

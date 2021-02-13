@@ -15,3 +15,7 @@ header {
   width: 300px;
   height: 200px;
 }
+
+.alert-success {
+  background: green;
+}

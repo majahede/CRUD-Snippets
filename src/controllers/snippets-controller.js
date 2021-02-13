@@ -23,7 +23,7 @@ export class SnippetsController {
       res.render('snippets/index', { viewData })
       console.log(viewData)
     } catch (error) {
-      console.log(error)
+      next(error)
     }
   }
 
@@ -55,10 +55,11 @@ export class SnippetsController {
       // save snippet to the database.
       await snippet.save()
 
+      req.session.flash = { type: 'success', text: 'The snippet was created successfully.' }
       // redirect to start page.
       res.redirect('.')
     } catch (error) {
-      console.log(error)
+      req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./new')
     }
   }
@@ -78,6 +79,7 @@ export class SnippetsController {
       }
       res.render('snippets/edit', { viewData })
     } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
       res.redirect('..')
     }
   }
@@ -94,9 +96,11 @@ export class SnippetsController {
       await Snippet.updateOne({ _id: req.body.id }, {
         value: req.body.value
       })
+      req.session.flash = { type: 'success', text: 'The snippet was updated successfully.' }
       res.redirect('..')
     } catch (error) {
-      console.log(error)
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('./edit')
     }
   }
 
@@ -115,6 +119,7 @@ export class SnippetsController {
       }
       res.render('snippets/remove', { viewData })
     } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
       res.redirect('..')
     }
   }
@@ -129,9 +134,12 @@ export class SnippetsController {
   async delete (req, res) {
     try {
       await Snippet.deleteOne({ _id: req.body.id })
+      req.session.flash = {
+        type: 'success', text: 'The snippet was deleted successfully.' // objekt som lagras på serversidan i en sessionsvariabel
+      }
       res.redirect('..')
     } catch (error) {
-      console.log(error)
+      req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./remove')
     }
   }
