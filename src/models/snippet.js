@@ -9,5 +9,3 @@ const schema = new mongoose.Schema({
 
 // create a model using the schema.
 export const Snippet = mongoose.model('Snippet', schema)
-
-// An instance of a model is called a document.

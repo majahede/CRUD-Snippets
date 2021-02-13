@@ -1,0 +1,11 @@
+<h1>
+   Update
+</h1>
+
+<form method="post" action="./update">
+  <input type="hidden" name="id" value="{{viewData.id}}" />
+  <div>
+    <input type="text" name="value" placeholder="Update snippet here" value="{{viewData.value}}" required="required" autofocus="autofocus" />
+  </div>
+  <button type="submit">Update Task</button>
+</form>

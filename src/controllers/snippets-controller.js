@@ -59,6 +59,26 @@ export class SnippetsController {
       res.redirect('.')
     } catch (error) {
       console.log(error)
+      res.redirect('./new')
+    }
+  }
+
+  /**
+   * Returns a HTML form for editing a snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   */
+  async edit (req, res) {
+    try {
+      const snippet = await Snippet.findOne({ _id: req.params.id })
+      const viewData = {
+        id: snippet._id,
+        value: snippet.value
+      }
+      res.render('snippets/edit', { viewData })
+    } catch (error) {
+      res.redirect('..')
     }
   }
 
@@ -74,8 +94,28 @@ export class SnippetsController {
       await Snippet.updateOne({ _id: req.body.id }, {
         value: req.body.value
       })
+      res.redirect('..')
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  /**
+   * Returns a HTML form for removing a snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   */
+  async remove (req, res) {
+    try {
+      const snippet = await Snippet.findOne({ _id: req.params.id })
+      const viewData = {
+        id: snippet._id,
+        value: snippet.value
+      }
+      res.render('snippets/remove', { viewData })
+    } catch (error) {
+      res.redirect('..')
     }
   }
 
@@ -89,8 +129,10 @@ export class SnippetsController {
   async delete (req, res) {
     try {
       await Snippet.deleteOne({ _id: req.body.id })
+      res.redirect('..')
     } catch (error) {
       console.log(error)
+      res.redirect('./remove')
     }
   }
 }

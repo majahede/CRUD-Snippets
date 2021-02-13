@@ -1,5 +1,6 @@
 import express from 'express'
 import hbs from 'express-hbs'
+// import session from 'express-session'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -19,7 +20,7 @@ const main = async () => {
     // Set up morgan logger.
     app.use(logger('dev'))
 
-    // View enginge set up
+    // View enginge setup.
     app.engine('hbs', hbs.express4({
       defaultLayout: join(directoryFullName, 'views', 'layouts', 'default'),
       partialsDir: join(directoryFullName, 'views', 'partials')
