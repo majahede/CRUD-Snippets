@@ -1,6 +1,6 @@
 import express from 'express'
 import hbs from 'express-hbs'
-// import session from 'express-session'
+import session from 'express-session'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -35,6 +35,21 @@ const main = async () => {
 
     // serve static files.
     app.use(express.static(join(directoryFullName, '..', 'public')))
+
+    // Setup and use session middleware.
+    const sessionOptions = {
+      name: process.env.SESSION_NAME,
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        sameSite: 'lax'
+      }
+    }
+
+    app.use(session(sessionOptions))
 
     // register routes
     app.use('/', router)
