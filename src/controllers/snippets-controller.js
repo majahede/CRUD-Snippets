@@ -143,4 +143,27 @@ export class SnippetsController {
       res.redirect('./remove')
     }
   }
+
+  /**
+   * Authorize user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {Function} error
+   */
+  async authorize (req, res, next) {
+    try {
+      const snippet = await Snippet.findOne({ _id: req.params.id })
+      if (req.session.userId !== snippet.userId) {
+        const error = new Error('Forbidden')
+        error.statusCode = 403
+        return next(error)
+      }
+      next()
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('..')
+    }
+  }
 }

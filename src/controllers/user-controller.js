@@ -31,9 +31,11 @@ export class UserController {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
       req.session.regenerate(() => {
-        res.redirect('..')
-        console.log(user)
+        req.session.user = user
+        req.session.loggedIn = true
       })
+      res.redirect('..')
+      console.log(user.username)
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('login')
