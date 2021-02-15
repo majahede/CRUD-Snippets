@@ -87,7 +87,7 @@ export class UserController {
   }
 
   /**
-   * Authenticate and log in user.
+   * Check if user is logged in.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -97,8 +97,8 @@ export class UserController {
   async authorize (req, res, next) {
     try {
       if (!req.session.user) {
-        const error = new Error('Forbidden')
-        error.statusCode = 403
+        const error = new Error('Not found')
+        error.statusCode = 404
         return next(error)
       }
       next()

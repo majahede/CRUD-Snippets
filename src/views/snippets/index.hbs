@@ -2,6 +2,7 @@
   CRUD Snippets application
 </h1>
 
+{{#if loggedIn}}
 <table>
     <thead>
         <tr>
@@ -23,3 +24,25 @@
         {{/if}}
     </tbody>
 </table>
+{{else}}
+<table>
+    <thead>
+        <tr>
+            <th>Snippet</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#if viewData.snippets}}
+        {{#each viewData.snippets}}
+        <tr>
+            <td><textarea name="value" class="view-snippet" readonly>{{this.value}}</textarea></td>
+        </tr>
+        {{/each}}
+        {{/if}}
+    </tbody>
+</table>
+{{/if}}
+ 
+
+    

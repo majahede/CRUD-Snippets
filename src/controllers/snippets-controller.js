@@ -22,7 +22,6 @@ export class SnippetsController {
             userId: snippet.userId
           }))
       }
-      console.log(viewData)
       res.render('snippets/index', { viewData })
     } catch (error) {
       next(error)

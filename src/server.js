@@ -68,6 +68,14 @@ const main = async () => {
       next()
     })
 
+    app.use((req, res, next) => {
+      // Flash messages - survives only a round trip.
+      if (req.session.loggedIn) {
+        res.locals.loggedIn = req.session.loggedIn
+      }
+      next()
+    })
+
     // register routes
     app.use('/', router)
 
