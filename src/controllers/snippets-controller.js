@@ -48,6 +48,7 @@ export class SnippetsController {
       value: undefined
     }
     res.render('snippets/new', { viewData })
+    console.log(req.session, req.session.userName)
   }
 
   /**
