@@ -159,7 +159,7 @@ export class SnippetsController {
       const snippet = await Snippet.findOne({ _id: req.params.id })
       if (req.session.userId !== snippet.userId) {
         const error = new Error('Forbidden')
-        error.statusCode = 403
+        error.status = 403
         return next(error)
       }
       next()

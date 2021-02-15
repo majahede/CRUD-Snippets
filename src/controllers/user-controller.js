@@ -98,7 +98,7 @@ export class UserController {
     try {
       if (!req.session.user) {
         const error = new Error('Not found')
-        error.statusCode = 404
+        error.status = 404
         return next(error)
       }
       next()

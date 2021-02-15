@@ -79,9 +79,33 @@ const main = async () => {
     // register routes
     app.use('/', router)
 
-    app.listen(process.env.PORT, () =>
+    // Error handler.
+    app.use(function (err, req, res, next) {
+    // 404 Not Found.
+      if (err.status === 404) {
+        return res
+          .status(404)
+          .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
+      }
+
+      // 403 Forbidden.
+      if (err.status === 403) {
+        return res
+          .status(403)
+          .sendFile(join(directoryFullName, 'views', 'errors', '403.html'))
+      }
+
+      // 500 Internal Server Error.
+      if (req.app.get('env') !== 'development') {
+        return res
+          .status(500)
+          .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
+      }
+    })
+
+    app.listen(process.env.PORT, () => {
       console.log(`Server running now at http://localhost:${process.env.PORT}`)
-    )
+    })
   } catch (err) {
     console.error(err.message)
     process.exitCode = 1

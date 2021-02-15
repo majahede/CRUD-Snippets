@@ -20,6 +20,10 @@ header {
   background: green;
 }
 
+.alert-danger {
+  background: rgb(128, 0, 0);
+}
+
 .view-snippet {
   resize: none;
   height: 130px;
