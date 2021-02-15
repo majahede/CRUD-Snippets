@@ -11,3 +11,4 @@ router.get('/signup', (req, res, next) => userController.signUp(req, res, next))
 router.post('/register', (req, res, next) => userController.register(req, res, next))
 
 router.post('/login', (req, res, next) => userController.login(req, res, next))
+router.get('/logout', (req, res, next) => userController.logout(req, res, next))

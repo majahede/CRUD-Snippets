@@ -4,6 +4,9 @@ import mongoose from 'mongoose'
 const snippetSchema = new mongoose.Schema({
   value: {
     type: String
+  },
+  userId: {
+    type: Object
   }
 })
 

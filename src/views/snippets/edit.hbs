@@ -5,7 +5,7 @@
 <form method="post" action="./update">
   <input type="hidden" name="id" value="{{viewData.id}}" />
   <div>
-    <input type="text" name="value" placeholder="Update snippet here" value="{{viewData.value}}" required="required" autofocus="autofocus" />
+    <textarea cols="40" rows="5" name="value"  placeholder="Snippet" autofocus="autofocus" required="required" >{{viewData.value}}</textarea>
   </div>
   <button type="submit">Update Task</button>
 </form>

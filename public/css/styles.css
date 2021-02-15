@@ -19,3 +19,11 @@ header {
 .alert-success {
   background: green;
 }
+
+.view-snippet {
+  resize: none;
+  height: 130px;
+  width: 350px;
+  border-radius: 10px;
+  font-size: 14px;
+}

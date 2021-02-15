@@ -13,7 +13,7 @@
         {{#if viewData.snippets}}
         {{#each viewData.snippets}}
         <tr>
-            <td>{{this.value}}</td>
+            <td><textarea name="value" class="view-snippet" readonly>{{this.value}}</textarea></td>
             <td>
                 <a href="./{{this.id}}/edit"><span>Update</span></a>
                 <a href="./{{this.id}}/remove"><span>Delete</span></a>

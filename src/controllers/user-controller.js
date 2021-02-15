@@ -14,7 +14,6 @@ export class UserController {
    */
   async signIn (req, res) {
     res.render('snippets/login')
-    console.log(User)
   }
 
   /**
@@ -25,7 +24,6 @@ export class UserController {
    */
   async signUp (req, res) {
     res.render('snippets/signup')
-    console.log(User)
   }
 
   /**
@@ -73,6 +71,40 @@ export class UserController {
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('login')
+    }
+  }
+
+  /**
+   * Authenticate and log in user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async logout (req, res, next) {
+    req.session.destroy() // destroys this session
+    res.redirect('..')
+  }
+
+  /**
+   * Authenticate and log in user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {Function} next
+   */
+  async authorize (req, res, next) {
+    try {
+      if (!req.session.user) {
+        const error = new Error('Forbidden')
+        error.statusCode = 403
+        return next(error)
+      }
+      next()
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('..')
     }
   }
 }

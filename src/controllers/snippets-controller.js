@@ -1,5 +1,5 @@
 import { Snippet } from '../models/snippet.js'
-import { User } from '../models/user.js'
+// import { User } from '../models/user.js'
 
 /**
  * Encapsulates a controller.
@@ -18,20 +18,12 @@ export class SnippetsController {
         snippets: (await Snippet.find({}))
           .map(snippet => ({ // Transform to object.
             id: snippet._id,
-            value: snippet.value
+            value: snippet.value,
+            userId: snippet.userId
           }))
       }
-      const users = {
-        users: (await User.find({}))
-          .map(user => ({ // Transform to object.
-            id: user._id,
-            username: user.username,
-            password: user.password
-          }))
-      }
-      res.render('snippets/index', { viewData })
       console.log(viewData)
-      console.log(users)
+      res.render('snippets/index', { viewData })
     } catch (error) {
       next(error)
     }
@@ -48,7 +40,6 @@ export class SnippetsController {
       value: undefined
     }
     res.render('snippets/new', { viewData })
-    console.log(req.session, req.session.userName)
   }
 
   /**
@@ -61,11 +52,11 @@ export class SnippetsController {
   async create (req, res) {
     try {
       const snippet = new Snippet({
-        value: req.body.value
+        value: req.body.value,
+        userId: req.session.userId
       })
       // save snippet to the database.
       await snippet.save()
-
       req.session.flash = { type: 'success', text: 'The snippet was created successfully.' }
       // redirect to start page.
       res.redirect('.')
@@ -128,6 +119,7 @@ export class SnippetsController {
         id: snippet._id,
         value: snippet.value
       }
+      console.log(typeof viewData.id)
       res.render('snippets/remove', { viewData })
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
