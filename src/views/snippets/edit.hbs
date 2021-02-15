@@ -1,11 +1,10 @@
-<h1>
+<h2>
    Update
-</h1>
-
+</h2>
 <form method="post" action="./update">
   <input type="hidden" name="id" value="{{viewData.id}}" />
   <div>
-    <textarea cols="40" rows="5" name="value"  placeholder="Snippet" autofocus="autofocus" required="required" >{{viewData.value}}</textarea>
+    <textarea class="snippets-input" name="value"  placeholder="Snippet" autofocus="autofocus" required="required" >{{viewData.value}}</textarea>
   </div>
-  <button type="submit">Update Task</button>
+  <button type="submit">Update Snippet</button>
 </form>

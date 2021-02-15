@@ -4,19 +4,13 @@
 
 {{#if loggedIn}}
 <table>
-    <thead>
-        <tr>
-            <th>Snippet</th>
-            <th>Action</th>
-        </tr>
-    </thead>
     <tbody>
         {{#if viewData.snippets}}
         {{#each viewData.snippets}}
         <tr>
             <td><textarea name="value" class="view-snippet" readonly>{{this.value}}</textarea></td>
             <td>
-                <a href="./{{this.id}}/edit"><span>Update</span></a>
+                <a href="./{{this.id}}/edit"><span>Edit</span></a>
                 <a href="./{{this.id}}/remove"><span>Delete</span></a>
             </td>
         </tr>
@@ -26,12 +20,6 @@
 </table>
 {{else}}
 <table>
-    <thead>
-        <tr>
-            <th>Snippet</th>
-            <th>Action</th>
-        </tr>
-    </thead>
     <tbody>
         {{#if viewData.snippets}}
         {{#each viewData.snippets}}

@@ -1,33 +1,104 @@
 * {
   margin: 0;
+  color:rgb(9, 95, 62);
+}
+
+html {
+text-align: center;
 }
 
 body {
-  background-color: pink;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+main {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h1 {
+  margin: 20px 0;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+.btn{
+  font-size: 16px;
+  margin: 10px;
+  border: 2px solid rgb(9, 95, 62);
+  padding: 5px, 10px;
+}
+
+.login {
+display: block;
+font-size: 20px;
+}
+
+.snippets {
+  text-align: center;
+}
+.snippets-input {
+  height: 130px;
+  width: 350px;
 }
 
 header {
-  background-color: grey;
-  height: 100px;
+  background-color: rgb(235, 235, 235);
+  height: 80px;
+  text-align: center;
 }
 
-#snippets-input {
-  width: 300px;
-  height: 200px;
+nav ul > li{
+  margin-top: 5px;
+  display: inline-block;
+  font-size: 25px;
+  padding: 20px;
+  
+}
+
+a {
+  text-decoration: none;
+  color:rgb(9, 95, 62)
+}
+
+a:visited {
+  text-decoration: none;
 }
 
 .alert-success {
-  background: green;
+  background: rgb(195, 241, 195);
+  height: 50px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 2.5;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .alert-danger {
-  background: rgb(128, 0, 0);
+  background: rgb(247, 177, 177);
+  color: rgb(110, 3, 3);
+  height: 50px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 2.5;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .view-snippet {
+  box-sizing: border-box;
   resize: none;
   height: 130px;
   width: 350px;
   border-radius: 10px;
   font-size: 14px;
+  padding: 10px;
+  outline: none;
 }
