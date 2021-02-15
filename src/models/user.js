@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bycryptjs'
+import bcrypt from 'bcryptjs'
 
 // Create a schema.
 const userSchema = new mongoose.Schema({
@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: [6, 'The password must be at least 6 charachters.'],
+    minlength: [8, 'The password must be at least 8 charachters.'],
     required: true
   }
 }, {
