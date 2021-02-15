@@ -2,6 +2,7 @@ import express from 'express'
 import hbs from 'express-hbs'
 import session from 'express-session'
 import logger from 'morgan'
+import helmet from 'helmet'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { router } from './routes/router.js'
@@ -19,6 +20,8 @@ const main = async () => {
 
     // Set up morgan logger.
     app.use(logger('dev'))
+
+    app.use(helmet())
 
     // View enginge setup.
     app.engine('hbs', hbs.express4({
