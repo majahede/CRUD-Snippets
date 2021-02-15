@@ -13,11 +13,44 @@ export class UserController {
    * @param {object} res - Express response object.
    */
   async signIn (req, res) {
-    const viewData = {
-      value: undefined
-    }
-    res.render('snippets/login', { viewData })
+    res.render('snippets/login')
     console.log(User)
+  }
+
+  /**
+   * Returns a HTML form for signing in.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   */
+  async signUp (req, res) {
+    res.render('snippets/signup')
+    console.log(User)
+  }
+
+  /**
+   * Register user to database.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async register (req, res, next) {
+    try {
+      const user = new User({
+        username: req.body.username,
+        password: req.body.password
+      })
+      // save user to the database.
+      await user.save()
+
+      req.session.flash = { type: 'success', text: 'The account was created successfully.' }
+      // redirect to start page.
+      res.redirect('..')
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: 'The username is already taken.' }
+      res.redirect('/login')
+    }
   }
 
   /**

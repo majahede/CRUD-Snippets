@@ -1,4 +1,5 @@
 import { Snippet } from '../models/snippet.js'
+import { User } from '../models/user.js'
 
 /**
  * Encapsulates a controller.
@@ -20,8 +21,17 @@ export class SnippetsController {
             value: snippet.value
           }))
       }
+      const users = {
+        users: (await User.find({}))
+          .map(user => ({ // Transform to object.
+            id: user._id,
+            username: user.username,
+            password: user.password
+          }))
+      }
       res.render('snippets/index', { viewData })
       console.log(viewData)
+      console.log(users)
     } catch (error) {
       next(error)
     }

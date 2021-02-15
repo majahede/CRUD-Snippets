@@ -1,9 +1,9 @@
 Sign up
 
-<div class="signup">
-<form action="/signup" method="post">
-Username: <input type="text" name="username" required="required">
-Password: <input type="password" name="password" required="required" minlength="8">
+<div class="register">
+<form action="/register" method="post">
+Username: <input type="text" name="username" value="{{username}}" required="required">
+Password: <input type="password" name="password" value="{{password}}" required="required" minlength="8">
 <button type="submit">Sign up</button>
 </form>
 </div>
