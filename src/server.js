@@ -18,7 +18,7 @@ const main = async () => {
 
     const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
-    const baseURL = process.env.BASE_URL || '/'
+    const baseURL = process.env.BASE_URL
 
     // Set up morgan logger.
     app.use(logger('dev'))
