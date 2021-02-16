@@ -24,11 +24,15 @@ h2 {
   font-size: 25px;
 }
 
-.btn{
+.btn {
   font-size: 16px;
   margin: 10px;
   border: 2px solid rgb(9, 95, 62);
   padding: 5px, 10px;
+}
+
+.username {
+  float: left;
 }
 
 .login {
@@ -45,7 +49,7 @@ font-size: 20px;
 }
 
 header {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(245, 245, 245);
   height: 80px;
   text-align: center;
 }
@@ -94,11 +98,13 @@ a:visited {
 
 .view-snippet {
   box-sizing: border-box;
+  background-color: rgb(245, 245, 245);
   resize: none;
   height: 130px;
   width: 350px;
   border-radius: 10px;
   font-size: 14px;
-  padding: 10px;
+  padding: 15px;
   outline: none;
+  border: none;
 }

@@ -1,5 +1,3 @@
-// import { User } from '../models/user.js'
-
 import { User } from '../models/user.js'
 
 /**
@@ -11,19 +9,29 @@ export class UserController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
    */
-  async signIn (req, res) {
-    res.render('snippets/login')
+  async signIn (req, res, next) {
+    try {
+      res.render('snippets/login')
+    } catch (error) {
+      next(error)
+    }
   }
 
   /**
-   * Returns a HTML form for signing in.
+   * Returns a HTML form for signing up.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
    */
-  async signUp (req, res) {
-    res.render('snippets/signup')
+  async signUp (req, res, next) {
+    try {
+      res.render('snippets/signup')
+    } catch (error) {
+      next(error)
+    }
   }
 
   /**
@@ -44,10 +52,10 @@ export class UserController {
 
       req.session.flash = { type: 'success', text: 'The account was created successfully.' }
       // redirect to start page.
-      res.redirect('..')
+      res.redirect('/login')
     } catch (error) {
       req.session.flash = { type: 'danger', text: 'The username is already taken.' }
-      res.redirect('/login')
+      res.redirect('/signup')
     }
   }
 
@@ -64,26 +72,30 @@ export class UserController {
       req.session.regenerate(() => {
         req.session.user = user
         req.session.userId = user._id
-        req.session.userName = user.username
+        req.session.username = user.username
         req.session.loggedIn = true
         res.redirect('..')
       })
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
-      res.redirect('login')
+      res.redirect('/login')
     }
   }
 
   /**
-   * Authenticate and log in user.
+   * Log out user.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
   async logout (req, res, next) {
-    req.session.destroy() // destroys this session
-    res.redirect('..')
+    try {
+      req.session.destroy()
+      res.redirect('..')
+    } catch (error) {
+      next(error)
+    }
   }
 
   /**

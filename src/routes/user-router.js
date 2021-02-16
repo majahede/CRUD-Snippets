@@ -1,6 +1,5 @@
 import express from 'express'
 import { UserController } from '../controllers/user-controller.js'
-// import { snippetsController } from '../controllers/snippets-controller.js'
 
 export const router = express.Router()
 

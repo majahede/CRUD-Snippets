@@ -7,6 +7,11 @@
     <tbody>
         {{#if viewData.snippets}}
         {{#each viewData.snippets}}
+         <tr>
+          <td>
+            <p class="username">{{this.username}}</p>
+          </td>
+        </tr>
         <tr>
             <td><textarea name="value" class="view-snippet" readonly>{{this.value}}</textarea></td>
             <td>

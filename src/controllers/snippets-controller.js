@@ -1,5 +1,4 @@
 import { Snippet } from '../models/snippet.js'
-// import { User } from '../models/user.js'
 
 /**
  * Encapsulates a controller.
@@ -19,10 +18,12 @@ export class SnippetsController {
           .map(snippet => ({ // Transform to object.
             id: snippet._id,
             value: snippet.value,
-            userId: snippet.userId
+            userId: snippet.userId,
+            username: snippet.username
           }))
       }
       res.render('snippets/index', { viewData })
+      console.log(req.session)
     } catch (error) {
       next(error)
     }
@@ -33,12 +34,17 @@ export class SnippetsController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
    */
-  async new (req, res) {
-    const viewData = {
-      value: undefined
+  async new (req, res, next) {
+    try {
+      const viewData = {
+        value: undefined
+      }
+      res.render('snippets/new', { viewData })
+    } catch (error) {
+      next(error)
     }
-    res.render('snippets/new', { viewData })
   }
 
   /**
@@ -52,13 +58,15 @@ export class SnippetsController {
     try {
       const snippet = new Snippet({
         value: req.body.value,
-        userId: req.session.userId
+        userId: req.session.userId,
+        username: req.session.username
       })
       // save snippet to the database.
       await snippet.save()
       req.session.flash = { type: 'success', text: 'The snippet was created successfully.' }
       // redirect to start page.
       res.redirect('.')
+      console.log(snippet)
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./new')
@@ -86,7 +94,7 @@ export class SnippetsController {
   }
 
   /**
-   * Updates a snippet.
+   * Updates a specified snippet.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -127,7 +135,7 @@ export class SnippetsController {
   }
 
   /**
-   * Deletes a snippet.
+   * Deletes a specified snippet.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -137,7 +145,7 @@ export class SnippetsController {
     try {
       await Snippet.deleteOne({ _id: req.body.id })
       req.session.flash = {
-        type: 'success', text: 'The snippet was deleted successfully.' // objekt som lagras på serversidan i en sessionsvariabel
+        type: 'success', text: 'The snippet was deleted successfully.'
       }
       res.redirect('..')
     } catch (error) {
@@ -147,12 +155,12 @@ export class SnippetsController {
   }
 
   /**
-   * Authorize user.
+   * Check if user is authorized.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
-   * @returns {Function} error
+   * @returns {Function} next - Error.
    */
   async authorize (req, res, next) {
     try {

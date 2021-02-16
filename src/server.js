@@ -59,8 +59,8 @@ const main = async () => {
 
     app.use(session(sessionOptions))
 
+    // Flash messages.
     app.use((req, res, next) => {
-      // Flash messages - survives only a round trip.
       if (req.session.flash) {
         res.locals.flash = req.session.flash
         delete req.session.flash
@@ -69,7 +69,6 @@ const main = async () => {
     })
 
     app.use((req, res, next) => {
-      // Flash messages - survives only a round trip.
       if (req.session.loggedIn) {
         res.locals.loggedIn = req.session.loggedIn
       }

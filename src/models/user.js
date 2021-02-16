@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-// hash anbd salt
+// hash anb salt
 userSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 8)
 })
