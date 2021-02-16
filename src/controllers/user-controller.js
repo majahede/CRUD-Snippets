@@ -51,11 +51,11 @@ export class UserController {
       await user.save()
 
       req.session.flash = { type: 'success', text: 'The account was created successfully.' }
-      // redirect to start page.
-      res.redirect('/login')
+      // redirect to log in.
+      res.redirect('./login')
     } catch (error) {
       req.session.flash = { type: 'danger', text: 'The username is already taken.' }
-      res.redirect('/signup')
+      res.redirect('./signup')
     }
   }
 
@@ -74,11 +74,11 @@ export class UserController {
         req.session.userId = user._id
         req.session.username = user.username
         req.session.loggedIn = true
-        res.redirect('..')
+        res.redirect('.')
       })
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
-      res.redirect('/login')
+      res.redirect('./login')
     }
   }
 
@@ -92,7 +92,7 @@ export class UserController {
   async logout (req, res, next) {
     try {
       req.session.destroy()
-      res.redirect('..')
+      res.redirect('.')
     } catch (error) {
       next(error)
     }
