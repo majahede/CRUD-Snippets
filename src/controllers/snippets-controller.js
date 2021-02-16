@@ -23,7 +23,6 @@ export class SnippetsController {
           }))
       }
       res.render('snippets/index', { viewData })
-      console.log(req.session)
     } catch (error) {
       next(error)
     }
@@ -66,7 +65,6 @@ export class SnippetsController {
       req.session.flash = { type: 'success', text: 'The snippet was created successfully.' }
       // redirect to start page.
       res.redirect('.')
-      console.log(snippet)
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./new')

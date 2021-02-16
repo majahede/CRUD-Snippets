@@ -1,7 +1,7 @@
 <h2>
    Edit
 </h2>
-<form method="post" action="./update">
+<form method="post" action="./{{viewData.id}}/update">
   <input type="hidden" name="id" value="{{viewData.id}}" />
   <div>
     <textarea class="snippets-input" name="value"  placeholder="Snippet" autofocus="autofocus" required="required" >{{viewData.value}}</textarea>

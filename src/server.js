@@ -18,6 +18,8 @@ const main = async () => {
 
     const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
+    const baseURL = process.env.BASE_URL || '/'
+
     // Set up morgan logger.
     app.use(logger('dev'))
 
@@ -65,6 +67,9 @@ const main = async () => {
         res.locals.flash = req.session.flash
         delete req.session.flash
       }
+      // Pass the base URL to the views.
+      res.locals.baseURL = baseURL
+
       next()
     })
 

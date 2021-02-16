@@ -1,6 +1,6 @@
 <h1>Delete snippet</h1>
 
-<form method="post" action="./delete">
+<form method="post" action="./{{viewData.id}}/delete">
 <input type="hidden" name="id" value="{{viewData.id}}" />
 <textarea name="value" class="view-snippet" readonly>{{viewData.value}}</textarea><br>
   <button type="submit" autofocus="autofocus">Delete Snippet</button>
